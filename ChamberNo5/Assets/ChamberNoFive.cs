@@ -203,18 +203,9 @@ public class ChamberNoFive : MonoBehaviour {
     void Update () {
       if (Active) {
         TimerNumber -= Time.deltaTime;
-        if (TimerNumber < 10f) {
-          Timer.text = "0:0" + Math.Round(TimerNumber, 2).ToString();
-        }
-        else {
-          Timer.text = "0:" + Math.Round(TimerNumber, 2).ToString();
-        }
-        if ((TimerNumber > 10 && Timer.text.Length == 4) || TimerNumber <= 9 && Timer.text.Length == 4) {
-          Timer.text += ".00";
-        }
-        else if ((TimerNumber > 10 && Timer.text.Length == 6) || (TimerNumber <= 9 && Timer.text.Length == 6)) {
-          Timer.text += "0";
-        }
+        string DisplayTimerNumber = string.Format("{0:00.00}", Math.Round(TimerNumber, 2));
+        Timer.text = "0:" + DisplayTimerNumber;
+
         if (TimerNumber <= 30f - 21.89f && !YouCantHide[0]) {
           SoundIThink = Audio.PlaySoundAtTransformWithRef("youcanthide1.2x", transform);
           YouCantHide[0] = true;
